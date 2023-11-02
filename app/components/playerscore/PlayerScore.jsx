@@ -7,7 +7,7 @@ export default function PlayerScore(props) {
             <img src={avatar.src} alt="Player Avatar" />
             <h2>Player Name</h2>
             <h3>{props.score}</h3>
-            <p>Leg:</p>
+            <p>Leg: {props.leg}</p>
             <div className={styles['darts']}>
                 <p>{props.darts[0]}</p>
                 <p>{props.darts[1]}</p>
