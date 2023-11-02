@@ -6,6 +6,7 @@
 .darts {
     display: flex;
     justify-content: space-between;
+    margin: 32px auto;
 }
 
 .player-score h2 {
@@ -18,4 +19,20 @@
     font-size: 8rem;
     font-weight: 900;
     margin: 0;
+}
+
+.darts p {
+    width: 30%;
+}
+
+.darts p:before {
+    content: '';
+    width: 25px;
+    height: 25px;
+    background-image: url('/dart.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-right: 15px;
 }

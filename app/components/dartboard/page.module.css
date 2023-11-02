@@ -1,26 +1,3 @@
-.dart-board {
-    display: grid;
-    grid-template-columns: 3fr 2fr 1fr;
-    gap: 10px;
-}
-
-.outer-bull {
-    grid-column-start: 1;
-    grid-column-end: 3;
-}
-
-.dart-board p {
-    padding: 10px;
-    border-radius: var(--sm-radius);
-    color: var(--white);
-    font-weight: 600;
-    text-align: center;
-}
-
-.dart-board p:hover {
-    cursor: pointer;
-}
-
 .odd {
     background-color: var(--white);
     border: 1px solid var(--black);
@@ -38,13 +15,5 @@
 }
 
 .even + p, .even + p + p {
-    background-color: var(--red);
-}
-
-.outer-bull {
-    background-color: var(--green);
-}
-
-.outer-bull + p {
     background-color: var(--red);
 }
