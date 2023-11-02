@@ -1,6 +1,6 @@
 import DartBoard from "../components/dartboard/DartBoard";
 import GameHeader from "../components/GameHeader"
-import PlayerScore from "../components/PlayerScore/PlayerScore"
+import PlayerScore from "../components/playerscore/PlayerScore"
 
 export default function Oh1() {
     return(
