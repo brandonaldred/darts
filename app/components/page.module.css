@@ -1,0 +1,5 @@
+.black-header {
+    background-color: var(--black);
+    text-align: center;
+    padding: 25px;
+}

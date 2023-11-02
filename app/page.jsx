@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <main className={styles['main-content']}>
-      <div className={styles['home-container']}>
+      <div className={`${styles['home-container']} content-container`}>
         <img src={logo.src} alt="Marketing Darts" />
         <div className={styles['game-select-container']}>
           <h2>Select Game Type</h2>
