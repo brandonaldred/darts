@@ -14,7 +14,7 @@ export default function Oh1() {
     
     function endTurn() {
         const turnTotal = darts.reduce((acc, cur) => { return acc + cur })
-        setScore( score - turnTotal )
+        setScore( score - turnTotal >= 0 ? score - turnTotal : score )
         setLeg(leg + 1);
     }
 
