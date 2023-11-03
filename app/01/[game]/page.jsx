@@ -43,6 +43,7 @@ export default function Oh1() {
                     </div>
                 </div>
                 <div className={styles['dart-board']}>
+                    <p className={styles['even']} onClick={()=> {addDart(0)}}>Miss</p>
                     <p className={styles['outer-bull']} onClick={()=> {addDart(25)}}>Outer Bull</p>
                     <p onClick={()=> {addDart(50)}}>Bull</p>
                     { content.map((n) => {
