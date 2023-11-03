@@ -16,10 +16,13 @@ export default function Oh1() {
         const turnTotal = darts.reduce((acc, cur) => { return acc + cur })
         setScore( score - turnTotal >= 0 ? score - turnTotal : score )
         setLeg(leg + 1);
+        setDarts([])
     }
 
     function addDart(n) {
-       setDarts(prev => [...prev, n])
+        if(darts.length < 3) {
+            setDarts(prev => [...prev, n])
+        }
     }
 
     return(
