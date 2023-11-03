@@ -18,6 +18,10 @@ export default function Oh1() {
         setLeg(leg + 1);
     }
 
+     function addDart(n) {
+       setDarts(prev => [...prev, n])
+    }
+
     return(
         <>
             <GameHeader />
