@@ -12,7 +12,7 @@
 .darts {
     display: flex;
     justify-content: space-between;
-    margin: 32px auto;
+    margin: 32px auto 0;
 }
 
 .player-score h2 {
