@@ -1,12 +1,14 @@
 "use client"
-import DartBoard from '../components/dartboard/DartBoard'
-import GameHeader from '../components/GameHeader'
-import PlayerScore from '../components/playerscore/PlayerScore'
+import DartBoard from '../../components/dartboard/DartBoard'
+import GameHeader from '../../components/GameHeader'
+import PlayerScore from '../../components/playerscore/PlayerScore'
 import styles from './page.module.css'
 import { useState } from 'react'
+import { useParams } from 'next/navigation'
 
 export default function Oh1() {
-    const [score, setScore] = useState(301)
+    const game = useParams()
+    const [score, setScore] = useState(game.game)
     const [darts, setDarts] = useState([])
     const [leg, setLeg] = useState(0)
     
