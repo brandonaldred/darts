@@ -7,7 +7,7 @@ import { useState } from 'react'
 
 export default function Oh1() {
     const [score, setScore] = useState(301)
-    const [darts, setDarts] = useState([10,50,30])
+    const [darts, setDarts] = useState([])
     const [leg, setLeg] = useState(0)
     
     const content = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
@@ -18,7 +18,7 @@ export default function Oh1() {
         setLeg(leg + 1);
     }
 
-     function addDart(n) {
+    function addDart(n) {
        setDarts(prev => [...prev, n])
     }
 
@@ -29,10 +29,10 @@ export default function Oh1() {
                 <PlayerScore score={score} darts={darts} leg={leg}/>
                 <button onClick={endTurn} className={`${styles['end-turn']} ${darts.length > 2 ? styles.active :  styles.disabled }`}>End Turn</button>
                 <div className={styles['dart-board']}>
-                    <p className={styles['outer-bull']}>Outer Bull</p>
-                    <p>Bull</p>
+                    <p className={styles['outer-bull']} onClick={()=> {addDart(25)}}>Outer Bull</p>
+                    <p onClick={()=> {addDart(50)}}>Bull</p>
                     { content.map((n) => {
-                            return (<DartBoard key={n} content={n} class={n % 2 ? 'odd' : 'even'} />)
+                            return (<DartBoard addDart={addDart} key={n} content={n} class={n % 2 ? 'odd' : 'even'} />)
                         })
                     }
                 </div>
