@@ -1,6 +1,12 @@
 .player-score {
     padding: 25px;
     text-align: center;
+    position: sticky;
+    top: 0;
+    background-color: var(--white);
+    z-index: 99;
+    border-bottom: 1px solid var(--black);
+    margin-bottom: 15px;
 }
 
 .darts {

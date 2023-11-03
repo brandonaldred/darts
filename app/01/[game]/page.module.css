@@ -4,9 +4,8 @@
     gap: 10px;
 }
 
-.outer-bull {
-    grid-column-start: 1;
-    grid-column-end: 3;
+.miss {
+    background-color: var(--black);
 }
 
 .dart-board p {

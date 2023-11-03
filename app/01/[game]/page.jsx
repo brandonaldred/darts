@@ -34,6 +34,7 @@ export default function Oh1() {
                 <PlayerScore score={score} darts={darts} leg={leg}/>
                 <button onClick={endTurn} className={`${styles['end-turn']} ${darts.length > 2 ? styles.active :  styles.disabled }`}>End Turn</button>
                 <div className={styles['dart-board']}>
+                    <p className={styles['miss']} onClick={()=> {addDart(0)}}>Miss</p>
                     <p className={styles['outer-bull']} onClick={()=> {addDart(25)}}>Outer Bull</p>
                     <p onClick={()=> {addDart(50)}}>Bull</p>
                     { content.map((n) => {
