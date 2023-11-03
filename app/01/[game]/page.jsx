@@ -21,6 +21,10 @@ export default function Oh1() {
         setDarts([])
     }
 
+    function undoDarts() {
+        setDarts([]);
+    }
+
     function addDart(n) {
         if(darts.length < 3) {
             setDarts(prev => [...prev, n])
@@ -32,9 +36,10 @@ export default function Oh1() {
             <GameHeader />
             <div className={`content-container`}>
                 <PlayerScore score={score} darts={darts} leg={leg}/>
-                <button onClick={endTurn} className={`${styles['end-turn']} ${darts.length > 2 ? styles.active :  styles.disabled }`}>End Turn</button>
+                <div className={`${styles.buttons} ${darts.length > 2 ? styles['sticky-bottom']: ''}`}>
+                    <button className={styles.undo} onClick={()=> {undoDarts()}}><img src="/undo.svg" alt="Undo" /></button><button onClick={endTurn} className={`${styles['end-turn']} ${darts.length > 2 ? styles.active :  styles.disabled }`}>End Turn</button>
+                </div>
                 <div className={styles['dart-board']}>
-                    <p className={styles['miss']} onClick={()=> {addDart(0)}}>Miss</p>
                     <p className={styles['outer-bull']} onClick={()=> {addDart(25)}}>Outer Bull</p>
                     <p onClick={()=> {addDart(50)}}>Bull</p>
                     { content.map((n) => {
