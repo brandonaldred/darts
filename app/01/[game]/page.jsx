@@ -8,10 +8,7 @@ import { useParams } from 'next/navigation'
 
 export default function Oh1() {
     const game = useParams()
-    const player = {
-        one: 'brandon',
-        two: 'jack'
-    }
+    const [score, setScore] = useState(game.game)
     const [playerOneScore, setPlayerOneScore] = useState(game.game)
     const [playerTwoScore, setPlayerTwoScore] = useState(game.game)
     const [turn, setTurn] = useState('brandon')
@@ -50,7 +47,7 @@ export default function Oh1() {
     return(
         <>
             <GameHeader />
-            {playerOneScore == 0 || playerTwoScore == 0 && 
+            {score == 0 && 
             (<div className={styles['play-again']}>
                 <div>
                     <img src="/dart.svg" alt="dart" />
@@ -65,8 +62,7 @@ export default function Oh1() {
                     <div className={styles.inactive}>Player 2</div>
                 </div>
                 <div className={styles.sticky}>
-                    { turn == player.one && <PlayerScore player="brandon" score={playerOneScore} darts={darts} leg={leg} />}
-                    { turn == player.two && <PlayerScore player="jack" score={playerTwoScore} darts={darts} leg={leg} />}
+                    <PlayerScore player="Player Name" score={score} darts={darts} leg={leg} />
                     <div className={styles.buttons}>
                         <button className={styles.undo} onClick={()=> {undoDarts()}}><img src="/undo.svg" alt="Undo" /></button>
                         <button onClick={endTurn} className={`${styles['end-turn']} ${darts.length > 2 ? styles.active :  styles.disabled }`}>End Turn</button>
