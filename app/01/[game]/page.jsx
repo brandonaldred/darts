@@ -8,7 +8,13 @@ import { useParams } from 'next/navigation'
 
 export default function Oh1() {
     const game = useParams()
-    const [score, setScore] = useState(game.game)
+    const player = {
+        one: 'brandon',
+        two: 'jack'
+    }
+    const [playerOneScore, setPlayerOneScore] = useState(game.game)
+    const [playerTwoScore, setPlayerTwoScore] = useState(game.game)
+    const [turn, setTurn] = useState('brandon')
     const [darts, setDarts] = useState([])
     const [leg, setLeg] = useState(0)
     
@@ -17,12 +23,22 @@ export default function Oh1() {
     function endTurn() {
         const turnTotal = darts.reduce((acc, cur) => { return acc + cur })
         setScore( score - turnTotal >= 0 ? score - turnTotal : score )
-        setLeg(leg + 1);
         setDarts([])
     }
 
+    function playAgain() {
+        setDarts([])
+        setScore(game.game)
+     }
+
     function undoDarts() {
-        setDarts([]);
+        setDarts(prev => {
+            const newArr = [];
+            for (let i = 0; i < prev.length; i++) {
+                i !== prev.length - 1 && newArr.push(prev[i])
+            }
+            return newArr
+        });
     }
 
     function addDart(n) {
@@ -34,9 +50,23 @@ export default function Oh1() {
     return(
         <>
             <GameHeader />
+            {playerOneScore == 0 || playerTwoScore == 0 && 
+            (<div className={styles['play-again']}>
+                <div>
+                    <img src="/dart.svg" alt="dart" />
+                    <h2>Game Over</h2>
+                    <button onClick={() => { playAgain() }}>Play Again?</button>
+                </div>
+            </div>)
+            }
             <div className={`content-container`}>
+                <div className={styles['player-select']}>
+                    <div>Player 1</div>
+                    <div className={styles.inactive}>Player 2</div>
+                </div>
                 <div className={styles.sticky}>
-                    <PlayerScore score={score} darts={darts} leg={leg}/>
+                    { turn == player.one && <PlayerScore player="brandon" score={playerOneScore} darts={darts} leg={leg} />}
+                    { turn == player.two && <PlayerScore player="jack" score={playerTwoScore} darts={darts} leg={leg} />}
                     <div className={styles.buttons}>
                         <button className={styles.undo} onClick={()=> {undoDarts()}}><img src="/undo.svg" alt="Undo" /></button>
                         <button onClick={endTurn} className={`${styles['end-turn']} ${darts.length > 2 ? styles.active :  styles.disabled }`}>End Turn</button>
