@@ -1,0 +1,5 @@
+.player-image {
+    border-radius: 50%;
+    display: block;
+    width: 65px !important;
+}

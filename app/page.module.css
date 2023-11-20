@@ -1,0 +1,82 @@
+.main-content {
+    background: var(--black);
+    color: var(--white);
+    width: 100svw;
+    height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+  }
+  
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: center;
+  }
+  
+  .home-container img {
+    display: block;
+    width: 100%;
+  }
+  
+  .home-container h2 {
+    background: var(--black);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--red);
+    margin: -15px auto;
+    width: 50%;
+  }
+  
+  
+  .player-select-container {
+    max-width: 375px;
+    width: 100%;
+    margin: 45px;
+    border: 1px solid var(--red);
+    text-align: center;
+  }
+  
+  .players {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+    padding: 25px;
+  }
+  
+  .game-type {
+    border: 1px solid var(--white);
+    color: var(--white);
+    text-decoration: none;
+    padding: 10px 20px;
+    text-align: center;
+  }
+  
+  .game-full-width {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  
+  .play-game {
+    background: var(--red);
+    color: var(--white);
+    padding: 10px 25px;
+    margin: auto auto -25px;
+    display: block;
+    width: 80%;
+    text-decoration: none;
+  }
+  
+  .play-game:hover {
+    background: var(--red-hover);
+    cursor: pointer;
+  }
+  
+  .game-type:hover, .game-type-selected {
+    background: var(--white);
+    color: var(--black);
+  }
