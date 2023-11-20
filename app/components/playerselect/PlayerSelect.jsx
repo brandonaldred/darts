@@ -22,7 +22,7 @@ export default function PlayerSelect() {
         <>
           { userList.length > 0 && userList.map(user => {
             return (
-                <div key={user._id}>
+                <div key={user._id} className={styles.player}>
                     <img onClick={()=> { test }} className={styles['player-image']} src={`/user-images/${user.firstName.toLowerCase()}.jpg`} alt={user.userName} />
                     <p>{user.firstName}</p>
                 </div>
