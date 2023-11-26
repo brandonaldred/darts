@@ -2,7 +2,7 @@
     background: var(--black);
     color: var(--white);
     width: 100svw;
-    height: 100svh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,13 +35,15 @@
     padding: 15px;
     height: 100px;
     width: 100%;
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    justify-items: center;
     align-items: center;
   }
     
   .player-select-container {
     max-width: 375px;
+    margin-bottom: 1500px;
     width: 100%;
     border: 1px solid var(--red);
     text-align: center;
@@ -64,6 +66,11 @@
     padding: 20px 10px;
     margin: auto;
     align-content: center;
+  }
+
+  .players-selected {
+    opacity: 0.5;
+    filter: grayscale(100%);
   }
   
   .game-type {
