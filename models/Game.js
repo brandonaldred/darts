@@ -2,11 +2,13 @@ import mongoose, { Schema } from 'mongoose';
 
 const gameSchema = new Schema({
     playerOne: {
-        userName: String,
+        username: String,
     },
-    playerTwo: String,
-    type: String,
-    turns: Number
+    playerTwo: {
+        username: String,
+    },
+    type: { type: String, default: null},
+    innings: []
  }, {
     timestamps: true,
  })
