@@ -1,8 +1,13 @@
+"use client"
 import styles from './page.module.css'
 import logo from '../assets/images/logo.svg'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
-export default function Home() {
+export default function Home({  }) {
+  const router = useRouter()
+  console.log(router)
+  
   return (
     <main className={styles['main-content']}>
       <div className={`${styles['home-container']} content-container`}>

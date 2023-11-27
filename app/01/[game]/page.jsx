@@ -65,7 +65,7 @@ export default function Oh1() {
                     <PlayerScore player="Player Name" score={score} darts={darts} leg={leg} />
                     <div className={styles.buttons}>
                         <button className={styles.undo} onClick={()=> {undoDarts()}}><img src="/undo.svg" alt="Undo" /></button>
-                        <button onClick={endTurn} className={`${styles['end-turn']} ${darts.length > 2 ? styles.active :  styles.disabled }`}>End Turn</button>
+                        <button onClick={ () => {darts.length > 2 ? endTurn() : alert('please enter score') }} className={`${styles['end-turn']} ${darts.length > 2 ? styles.active :  styles.disabled }`}>End Turn</button>
                     </div>
                 </div>
                 <div className={styles['dart-board']}>

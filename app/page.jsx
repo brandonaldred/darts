@@ -4,6 +4,7 @@ import styles from './page.module.css'
 import logo from './assets/images/logo.svg'
 import Link from 'next/link'
 import PlayerSelect from './components/playerselect/PlayerSelect'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
   const [players, setPlayers] = useState([]);
@@ -60,7 +61,18 @@ export default function Home() {
             <div className={`${styles.players} ${players.length > 1 && styles['players-selected']}`}>
               {userList.length > 0 && <PlayerSelect players={updatePlayerList} users={userList} />}
             </div> 
-            { players.length == 2 && <Link className={styles['play-game']} href="/games">Play Game</Link> }
+            { players.length == 2 &&
+                <Link
+                  className={styles['play-game']}
+                  href={{
+                    pathname: '/games',
+                    query: {
+                      p1: players[0].username,
+                      p2: players[1].username
+                    }
+                  }}>
+                  Play Game
+                </Link> }
           </div>
         </div>
       </main>
