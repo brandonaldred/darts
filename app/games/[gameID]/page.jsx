@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter, useParams } from 'next/navigation'
 import { useState } from 'react'
 
-export default function Home({  }) {
+export default function Home() {
   const router = useRouter()
   const [game, setGame] = useState('')
 
