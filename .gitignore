@@ -8,7 +8,7 @@
 
 # testing
 /coverage
-/api/probability/
+app/api/probability/*
 
 # next.js
 /.next/
