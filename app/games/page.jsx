@@ -1,13 +1,9 @@
-"use client"
 import styles from './page.module.css'
 import logo from '../assets/images/logo.svg'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 export default function Home({  }) {
-  const router = useRouter()
-  console.log(router)
-  
+
   return (
     <main className={styles['main-content']}>
       <div className={`${styles['home-container']} content-container`}>
@@ -21,7 +17,7 @@ export default function Home({  }) {
             <Link className={`${styles['game-type']} ${styles['game-full-width']}`} href="#">3 Dart High</Link>
             <Link className={`${styles['game-type']} ${styles['game-full-width']}`} href="#">Cricket</Link>
           </div>
-          <Link className={styles['play-game']} href="#">Play Game</Link>
+          <Link className={styles['play-game']}>Play Game</Link>
         </div>
       </div>
     </main>

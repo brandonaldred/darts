@@ -8,7 +8,8 @@ const gameSchema = new Schema({
         username: String,
     },
     type: { type: String, default: null},
-    innings: []
+    innings: [],
+    winner: { type: String, default: null}
  }, {
     timestamps: true,
  })

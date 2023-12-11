@@ -7,11 +7,11 @@ const userSchema = new Schema({
     password: String,
     profileImage: String,
     rank: {
-        "301": Number,
-        "501": Number,
-        "cricket": Number,
-        "aroundWorld": Number,
-        "threeHigh": Number
+        "301": {type: Number, default: 1000},
+        "501": {type: Number, default: 1000},
+        "cricket": {type: Number, default: 1000},
+        "aroundWorld": {type: Number, default: 1000},
+        "threeHigh": {type: Number, default: 1000}
     },
     gamesPlayed: Number
  }, {

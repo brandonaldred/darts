@@ -12,8 +12,21 @@ export async function POST(req) {
             innings: []
         })
 
-    console.log(game)
     await Game.create(game)
 
     return NextResponse.json({message: 'Game Created', id: game._id}, { status: 201 })
+}
+
+export async function PATCH(req) {
+    const { id, updates } = await req.json();
+    await connectMongoDB();
+
+    const updatedGame = await Game.findByIdAndUpdate(id, updates, { new: true });
+
+    // Check if the game was found and updated
+    if (!updatedGame) {
+        return NextResponse.json({ message: 'Game not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: 'Game updated', game: updatedGame }, { status: 200 });
 }

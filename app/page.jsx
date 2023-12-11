@@ -7,6 +7,7 @@ import PlayerSelect from './components/playerselect/PlayerSelect'
 import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter()
   const [players, setPlayers] = useState([]);
 
   const [userList, setUserList] = useState([])
@@ -16,6 +17,30 @@ export default function Home() {
         .then( data => data.json())
         .then( data => setUserList(data.users))
     }, [])
+
+    function createGame() {
+    var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+    
+      var raw = JSON.stringify({
+        playerOne: { username: players[0].username },
+        playerTwo: { username: players[1].username }
+      });
+    
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+    
+      fetch("/api/games/create", requestOptions)
+        .then(response => response.json())
+        .then(result => router.push(`/games/${result.id}`))
+        .catch(error => console.log('error', error));
+    }
+
+    
 
     function updatePlayerList(player) {
       if (players.length < 2) { 
@@ -27,8 +52,7 @@ export default function Home() {
       player == 0 ? setPlayers( prev => { return [prev[1]] }) : setPlayers( prev => { return [prev[0]] })  
     }
     
-    console.log(players)
-
+    
     return (
       <main className={styles['main-content']}>
         <div className={`${styles['home-container']} content-container`}>
@@ -62,17 +86,9 @@ export default function Home() {
               {userList.length > 0 && <PlayerSelect players={updatePlayerList} users={userList} />}
             </div> 
             { players.length == 2 &&
-                <Link
-                  className={styles['play-game']}
-                  href={{
-                    pathname: '/games',
-                    query: {
-                      p1: players[0].username,
-                      p2: players[1].username
-                    }
-                  }}>
+                <div className={styles['play-game']} onClick={ () => {createGame()} }>
                   Play Game
-                </Link> }
+                </div> }
           </div>
         </div>
       </main>
