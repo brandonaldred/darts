@@ -17,7 +17,7 @@ export default function Home() {
             <Link className={`${styles['game-type']} ${styles['game-full-width']}`} href="#">3 Dart High</Link>
             <Link className={`${styles['game-type']} ${styles['game-full-width']}`} href="#">Cricket</Link>
           </div>
-          <Link className={styles['play-game']}>Play Game</Link>
+          {/*<Link className={styles['play-game']}>Play Game</Link>*/}
         </div>
       </div>
     </main>
