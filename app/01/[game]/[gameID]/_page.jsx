@@ -7,7 +7,6 @@ import { useState } from 'react'
 import { useParams } from 'next/navigation'
 
 export default function Oh1() {
-    const [players, setPlayers] = useState({})
     const game = useParams()
     const [score, setScore] = useState(game.game)
     const [playerOne, setPlayerOne] = useState('');
@@ -17,10 +16,12 @@ export default function Oh1() {
     const [turn, setTurn] = useState('brandon')
     const [darts, setDarts] = useState([])
     const [leg, setLeg] = useState(0)
-       
+    
+    const content = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+    
 
-    async function getGameInfo(id) {
-        await fetch(`/api/games?id=${id}`)
+    function getGameInfo(id) {
+        fetch(`/api/games?id=${id}`)
         .then(res => res.json())
         .then (data => {
             setPlayerOne(data.game.playerOne.username)
@@ -28,9 +29,8 @@ export default function Oh1() {
         })
     }
 
-
     getGameInfo(game.gameID)
-
+    
     function endTurn() {
         const turnTotal = darts.reduce((acc, cur) => { return acc + cur })
         setScore( score - turnTotal >= 0 ? score - turnTotal : score )
@@ -86,7 +86,7 @@ export default function Oh1() {
                     <p className={styles['even']} onClick={()=> {addDart(0)}}>Miss</p>
                     <p className={styles['outer-bull']} onClick={()=> {addDart(25)}}>Outer Bull</p>
                     <p onClick={()=> {addDart(50)}}>Bull</p>
-                    { [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].map((n) => {
+                    { content.map((n) => {
                             return (<DartBoard addDart={addDart} key={n} content={n} class={n % 2 ? 'odd' : 'even'} />)
                         })
                     }

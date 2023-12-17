@@ -4,7 +4,7 @@ import avatar from '../../assets/images/avatar-empty.svg'
 export default function PlayerScore(props) {
     return (
         <div className={styles['player-score']}>
-            <img src={avatar.src} alt="Player Avatar" />
+            <img src={props.avatar} alt="Player Avatar" />
             <h2>{props.player}</h2>
             <h3>{props.score}</h3>
             <p>Leg: {props.leg}</p>

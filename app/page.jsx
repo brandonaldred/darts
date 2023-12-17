@@ -64,7 +64,7 @@ export default function Home() {
                   <img
                   onClick={() => {removePlayerList(0)}}
                   className={styles['player-image']}
-                  src={`/user-images/${players[0].firstName.toLowerCase()}.jpg`}
+                  src={`${players[0].profileImage}`}
                 />
               }
             </div>
