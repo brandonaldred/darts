@@ -176,3 +176,34 @@
 .selected {
     display: none;
 }
+
+.darts {
+    display: flex;
+    justify-content: space-between;
+    margin: 32px auto 20px;
+    width: 100%;
+}
+
+.darts p {
+    width: 33%;
+    margin: auto;
+    text-align: center;
+}
+
+.darts p:before {
+    content: '';
+    width: 25px;
+    height: 25px;
+    background-image: url('/dart.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.first {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 25px;
+}

@@ -1,15 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
 
 const gameSchema = new Schema({
-    playerOne: {
-        username: String,
-    },
-    playerTwo: {
-        username: String,
-    },
     type: { type: String, default: null},
-    innings: [],
-    winner: { type: String, default: null}
+    players: [{ type: Schema.Types.Mixed }],
+    winner: { type: String, default: null},
+    innings: []
  }, {
     timestamps: true,
  })

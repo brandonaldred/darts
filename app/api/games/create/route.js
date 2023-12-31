@@ -4,15 +4,16 @@ import Game from "../../../../models/Game"
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-    const { playerOne, playerTwo } = await req.json();
+    const { players, type } = await req.json();
+    console.log(players, type)
     await connectMongoDB()
     const game = await new Game({
-            playerOne: playerOne,
-            playerTwo: playerTwo,
-            innings: []
+            players: players,
+            type: type
         })
 
     await Game.create(game)
+    console.log(game)
 
     return NextResponse.json({message: 'Game Created', id: game._id}, { status: 201 })
 }

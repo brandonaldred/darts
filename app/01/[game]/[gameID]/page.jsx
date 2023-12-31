@@ -3,33 +3,68 @@ import DartBoard from '../../../components/dartboard/DartBoard'
 import GameHeader from '../../../components/GameHeader'
 import PlayerScore from '../../../components/playerscore/PlayerScore'
 import styles from './page.module.css'
-import { useState } from 'react'
-import { useParams } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useParams, useSearchParams } from 'next/navigation'
 
 export default function Oh1() {
-    const [players, setPlayers] = useState({})
-    const game = useParams()
-    const [score, setScore] = useState(game.game)
-    const [playerOne, setPlayerOne] = useState('');
-    const [playerTwo, setPlayerTwo] = useState('');
-    const [playerOneScore, setPlayerOneScore] = useState(game.game)
-    const [playerTwoScore, setPlayerTwoScore] = useState(game.game)
-    const [turn, setTurn] = useState('brandon')
+    const searchParams = useSearchParams()
+    const gameType = useParams()
+    const [start, setStart] = useState(true)
+    const [score, setScore] = useState(gameType.game)
     const [darts, setDarts] = useState([])
-    const [leg, setLeg] = useState(0)
-       
+    const [game, setGame] = useState([
+        {
+            player: {},
+            score: gameType.game,
+            darts: [],
+            turn: false
+        },
+        {
+            player: {},
+            score: gameType.game,
+            darts: [],
+            turn: false
+        }
+    ])
 
-    async function getGameInfo(id) {
-        await fetch(`/api/games?id=${id}`)
-        .then(res => res.json())
-        .then (data => {
-            setPlayerOne(data.game.playerOne.username)
-            setPlayerTwo(data.game.playerTwo.username)
+    console.log(searchParams.get('player'))
+    
+    function updateGame(index, player = null, darts = null, score = null, turn = null) {
+        setGame((prev) => {
+            const updated = [...prev]
+            updated[index] = {
+               ...prev[index],
+               ...(player !== null  && {player: player}),
+               ...(darts !== null && {darts: [...updated[index].darts, darts]}),
+               ...(score !== null && {score: score}),
+               ...(turn && {turn: !prev[index].turn})
+            }
+            return updated
         })
     }
 
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const gameData = await fetch(`/api/games?id=${gameType.gameID}`).then(res => res.json());
+      
+                // Fetch player data for playerOne
+                const usernames = [gameData.game.playerOne.username, gameData.game.playerTwo.username];
 
-    getGameInfo(game.gameID)
+                // Fetch data for both players concurrently
+                const playerData = await fetch(`/api/users/list?p1=${usernames[0]}&p2=${usernames[1]}`).then(res => res.json());
+
+                playerData.users.map((player,index) => updateGame(index, player, null, gameType.game, false))
+
+            } catch (error) {
+              console.error("Error fetching data:", error);
+            }
+          }
+          
+          fetchData();
+
+
+      }, []);
 
     function endTurn() {
         const turnTotal = darts.reduce((acc, cur) => { return acc + cur })
@@ -39,7 +74,7 @@ export default function Oh1() {
 
     function playAgain() {
         setDarts([])
-        setScore(game.game)
+        setScore(gameType.game)
      }
 
     function undoDarts() {
@@ -58,6 +93,8 @@ export default function Oh1() {
         }
     }
 
+    console.log(game)
+
     return(
         <>
             <GameHeader />
@@ -71,15 +108,59 @@ export default function Oh1() {
             </div>)
             }
             <div className={`content-container`}>
+                { start && <div className={styles.first}>Select who goes first</div> }
+                {
+                game.length > 0 && 
+                //need to pull out and make these components so they can be updated by selected player
+                
                 <div className={styles['player-select']}>
-                    <div>{playerOne}</div>
-                    <div className={styles.inactive}>{playerTwo}</div>
+                    <div
+                        className={!game[0].turn && styles.inactive}
+                        onClick={() => {
+                            if (start) {
+                                setStart(false)
+                                updateGame(0, null, null, null, true)
+                                console.log(game)
+                            }
+                        }}
+                    >
+                        {game[0].player.firstName}
+                    </div>
+                    <div
+                        className={!game[1].turn && styles.inactive}
+                        onClick={() => {
+                            if (start) {
+                                setStart(false)
+                                updateGame(1, null, null, null, true)
+                                console.log(game)
+                            }
+                        }}
+                    >
+                        {game[1].player.firstName}
+                    </div>
                 </div>
+                }
                 <div className={styles.sticky}>
-                    <PlayerScore player={playerOne} avatar='/user-images/brandon.jpg' score={score} darts={darts} leg={leg} />
+                    { !start &&
+                        game.map((p, i) =>
+                            (<PlayerScore
+                                key={i}
+                                turn={p.turn}
+                                player={p.player.firstName}
+                                avatar={`/user-images/${p.player.firstName}.jpg`}
+                                score={p.score}
+                            />)
+                        )
+                    }
+                              
+                    <div className={styles['darts']}>
+                        <p>{darts[0]}</p>
+                        <p>{darts[1]}</p>
+                        <p>{darts[2]}</p>
+                    </div>
                     <div className={styles.buttons}>
                         <button className={styles.undo} onClick={()=> {undoDarts()}}><img src="/undo.svg" alt="Undo" /></button>
-                        <button onClick={ () => {darts.length > 2 ? endTurn() : alert('please enter score') }} className={`${styles['end-turn']} ${darts.length > 2 ? styles.active :  styles.disabled }`}>End Turn</button>
+                        {darts.length > 2 ? <button onClick={ () => {darts.length > 2 ? endTurn() : alert('please enter score') }} className={`${styles['end-turn']} ${styles.active}`}>End Turn</button> : <button onClick={()=> {addDart(0)}} className={`${styles['end-turn']} ${styles.active}`}>Miss</button>}
                     </div>
                 </div>
                 <div className={styles['dart-board']}>

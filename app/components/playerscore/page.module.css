@@ -9,12 +9,6 @@
     margin-bottom: 15px;
 }
 
-.darts {
-    display: flex;
-    justify-content: space-between;
-    margin: 32px auto 0;
-}
-
 .player-score h2 {
     font-size: 1.2rem;
     font-weight: 400;
@@ -28,18 +22,3 @@
     line-height: 6rem;
 }
 
-.darts p {
-    width: 30%;
-}
-
-.darts p:before {
-    content: '';
-    width: 25px;
-    height: 25px;
-    background-image: url('/dart.svg');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: inline-block;
-    margin-right: 15px;
-}

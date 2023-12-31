@@ -13,10 +13,13 @@ const userSchema = new Schema({
         "aroundWorld": {type: Number, default: 1000},
         "threeHigh": {type: Number, default: 1000}
     },
-    gamesPlayed: Number
+    gamesPlayed: Number,
+    equipment: {
+        darts: String,
+    },
  }, {
     timestamps: true,
- })
+ });
 
  const User = mongoose.models.User || mongoose.model('User', userSchema);
 
