@@ -13,18 +13,20 @@ export default function Home() {
   const [userList, setUserList] = useState([])
 
     useEffect(() => { 
-        fetch("/api/users/list")
+        fetch("/api/users/")
         .then( data => data.json())
-        .then( data => setUserList(data.users))
+        .then( data => setUserList(data.players))
     }, [])
 
-    function createGame() {
+    async function createGame() {
+    let url = `/api/users?p=${players[0].username}|${players[1].username}`;
+    const gamePlayers = await fetch(url)
+    .then(data => data.json())
     var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
     
       var raw = JSON.stringify({
-        playerOne: { username: players[0].username },
-        playerTwo: { username: players[1].username }
+        gamePlayers
       });
     
       var requestOptions = {
@@ -34,9 +36,9 @@ export default function Home() {
         redirect: 'follow'
       };
     
-      fetch("/api/games/create", requestOptions)
+      fetch("/api/games/", requestOptions)
         .then(response => response.json())
-        .then(result => router.push(`/games/${result.id}`))
+        .then(result => router.push(`/games/${result.name}`))
         .catch(error => console.log('error', error));
     }
 
@@ -64,7 +66,7 @@ export default function Home() {
                   <img
                   onClick={() => {removePlayerList(0)}}
                   className={styles['player-image']}
-                  src={`${players[0].profileImage}`}
+                  src={`/user-images/${players[0].firstName.toLowerCase()}.jpg`}
                 />
               }
             </div>

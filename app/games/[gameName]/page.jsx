@@ -26,7 +26,7 @@ export default function Home() {
       method: 'PATCH',
       headers: myHeaders,
       body: JSON.stringify({
-        id: params.gameID,
+        id: params.gameName,
         updates: {
           type: type,
         }
@@ -34,9 +34,9 @@ export default function Home() {
       redirect: 'follow'
     }
 
-    fetch("/api/games/create", requestOptions)
+    fetch("/api/games/", requestOptions)
       .then(response => response.text())
-      .then(result => router.push(`/01/${game}/${params.gameID}`))
+      .then(result => router.push(`/01/${game}/${params.gameName}`))
       .catch(error => console.log('error', error));
   }
   return (

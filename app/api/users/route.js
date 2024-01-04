@@ -11,9 +11,9 @@ export async function GET(req) {
     await connectMongoDB()
     let players;
     if (p) {
-        players = await User.find({username: {$in: p.split('|')}})
+        players = await User.find({username: {$in: p.split('|')}}).select('firstName username rank gamesPlayed equipment')
     } else {
-        players = await User.find()
+        players = await User.find().select('firstName username rank gamesPlayed equipment')
     }
     return NextResponse.json({players}, { status: 201 })
 }
@@ -22,7 +22,10 @@ export async function POST(req) {
     const { firstName, lastName, username, password, rank, gamesPlayed, equipment } = await req.json();
     await connectMongoDB()
 
-    
+    const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return NextResponse.error("Username already exists", { status: 400 });
+        }
 
     const salt = await bcrypt.genSalt()
     const hashword = await bcrypt.hash(password, salt)
