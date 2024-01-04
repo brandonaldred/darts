@@ -7,27 +7,11 @@ import { useState, useEffect } from 'react'
 import { useParams, useSearchParams } from 'next/navigation'
 
 export default function Oh1() {
-    const searchParams = useSearchParams()
     const gameType = useParams()
     const [start, setStart] = useState(true)
     const [score, setScore] = useState(gameType.game)
     const [darts, setDarts] = useState([])
-    const [game, setGame] = useState([
-        {
-            player: {},
-            score: gameType.game,
-            darts: [],
-            turn: false
-        },
-        {
-            player: {},
-            score: gameType.game,
-            darts: [],
-            turn: false
-        }
-    ])
-
-    console.log(searchParams.get('player'))
+    const [game, setGame] = useState({})
     
     function updateGame(index, player = null, darts = null, score = null, turn = null) {
         setGame((prev) => {
@@ -46,15 +30,15 @@ export default function Oh1() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const gameData = await fetch(`/api/games?id=${gameType.gameID}`).then(res => res.json());
-      
+                await fetch(`/api/games?id=${'6596c6a614b4a9afdac95ffa'}`).then(res => res.json()). then(data => setGame(data.game));
                 // Fetch player data for playerOne
-                const usernames = [gameData.game.playerOne.username, gameData.game.playerTwo.username];
+                const usernames = [game.players[0].username, game.players[1].username];
+                console.log(usernames)
 
                 // Fetch data for both players concurrently
-                const playerData = await fetch(`/api/users/list?p1=${usernames[0]}&p2=${usernames[1]}`).then(res => res.json());
-
-                playerData.users.map((player,index) => updateGame(index, player, null, gameType.game, false))
+                const playerData = await fetch(`/api/users?n=${usernames[0]}|${usernames[1]}`).then(res => res.json());
+                
+                playerData.map((player,index) => updateGame(index, player.first, null, gameType.game, false))
 
             } catch (error) {
               console.error("Error fetching data:", error);
@@ -93,8 +77,6 @@ export default function Oh1() {
         }
     }
 
-    console.log(game)
-
     return(
         <>
             <GameHeader />
@@ -110,12 +92,12 @@ export default function Oh1() {
             <div className={`content-container`}>
                 { start && <div className={styles.first}>Select who goes first</div> }
                 {
-                game.length > 0 && 
+                
                 //need to pull out and make these components so they can be updated by selected player
                 
                 <div className={styles['player-select']}>
                     <div
-                        className={!game[0].turn && styles.inactive}
+                        className={styles.inactive}
                         onClick={() => {
                             if (start) {
                                 setStart(false)
@@ -124,10 +106,10 @@ export default function Oh1() {
                             }
                         }}
                     >
-                        {game[0].player.firstName}
+                        {'test'}
                     </div>
                     <div
-                        className={!game[1].turn && styles.inactive}
+                        className={styles.inactive}
                         onClick={() => {
                             if (start) {
                                 setStart(false)
@@ -136,7 +118,7 @@ export default function Oh1() {
                             }
                         }}
                     >
-                        {game[1].player.firstName}
+                        {'test'}
                     </div>
                 </div>
                 }
