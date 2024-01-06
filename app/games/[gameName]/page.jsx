@@ -18,6 +18,7 @@ export default function Home() {
   ]
 
   const params = useParams()
+  
   function addGameType(type) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
@@ -26,15 +27,12 @@ export default function Home() {
       method: 'PATCH',
       headers: myHeaders,
       body: JSON.stringify({
-        id: params.gameName,
-        updates: {
-          type: type,
-        }
+         type: type,
       }),
       redirect: 'follow'
     }
-
-    fetch("/api/games/", requestOptions)
+  
+    fetch(`/api/games?n=${params.gameName}`, requestOptions)
       .then(response => response.text())
       .then(result => router.push(`/01/${game}/${params.gameName}`))
       .catch(error => console.log('error', error));

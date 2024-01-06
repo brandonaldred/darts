@@ -1,11 +1,24 @@
 import mongoose, { Schema } from 'mongoose';
 
+const inningSchema = new Schema({
+   score: String, // You can change the data type as needed
+   darts: [Number],
+});
+
+const playerSchema = new Schema({
+   // Define the properties for each player
+   firstName: String,
+   username: String,
+   // Add the innings property to store innings for each player
+   innings: [inningSchema],
+});
+
 const gameSchema = new Schema({
     name: { type: String, default: null },
     type: { type: String, default: null },
-    players: [{ type: Schema.Types.Mixed }],
+    players: [playerSchema],
     winner: { type: String, default: null },
-    innings: []
+    innings: { type: Number, default: 0 }
  }, {
     timestamps: true,
  })

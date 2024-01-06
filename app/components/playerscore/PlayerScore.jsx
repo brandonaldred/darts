@@ -3,7 +3,7 @@ import avatar from '../../assets/images/avatar-empty.svg'
 
 export default function PlayerScore(props) {
     return (
-        props.turn &&
+        props.show &&
         <div className={styles['player-score']}>
             <img src={props.avatar} alt="Player Avatar" />
             <h2>{props.player}</h2>

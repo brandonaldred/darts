@@ -23,6 +23,7 @@
 .dart-board p:hover {
     cursor: pointer;
     filter: opacity(80%) brightness(80%);
+    z-index: 0;
 }
 
 .odd {
@@ -96,6 +97,7 @@
     position: sticky;
     top: 0;
     background: var(--white);
+    z-index: 99;
 }
 
 .buttons {

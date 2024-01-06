@@ -35,7 +35,6 @@ export async function POST(req) {
 export async function PATCH(req) {
     const gameName = req.nextUrl.searchParams.get('n');
     const gameData = await req.json();
-
     await connectMongoDB();
     
     const game = await Game.findOne({name: gameName});
@@ -46,6 +45,8 @@ export async function PATCH(req) {
     if (gameData.players) { game.players = gameData.players; }
     if (gameData.winner) { game.winner = gameData.winner; }
     if (gameData.innings) { game.innings = gameData.innings; }
+
+    await game.save();
 
     return NextResponse.json({ message: 'Game updated', game: game }, { status: 200 });
 }
