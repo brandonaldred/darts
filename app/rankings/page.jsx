@@ -4,7 +4,8 @@ import PlayerCard from '../components/playercard/Playercard';
 import styles from './page.module.css';
 
 export default async function Rankings() {
-    const res = await fetch(`https://darts-brandonaldred.vercel.app/api/users/ranking?t=301`)
+    if (!process.env.NEXT_PUBLIC_BASE_API_URL) { return null }
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/users/ranking?t=301`)
     .then(res => res.json())
     .then(data => {
        return data.players.map((player, index) => {
