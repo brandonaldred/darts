@@ -55,7 +55,6 @@ export async function PATCH(req) {
     try {
         const userId = req.nextUrl.searchParams.get('id')
         const data = await req.json()
-        console.log(data.rank['301'])
         await connectMongoDB()
         const player = await User.findById(userId)
         if (!player) { return NextResponse.error( "User Not Found", { status: 404 } ) }
@@ -73,7 +72,6 @@ export async function PATCH(req) {
         if (data.rank.cricket) { player.rank.cricket = data.rank.cricket }
         if (data.rank.aroundWorld) { player.rank.aroundWorld = data.rank.aroundWorld }
         if (data.rank.threeHigh) { player.rank.threeHigh = data.rank.threeHigh }
-        console.log(player.rank['301'])
         await player.save()
         return NextResponse.json({ message: "User updated successfully" }, { status: 200 });
     } catch (e) { console.error("Error updating user:", e); return NextResponse.error('Failed to update user', {status: 500})}

@@ -4,9 +4,10 @@ import GameHeader from '../../../components/GameHeader'
 import PlayerScore from '../../../components/playerscore/PlayerScore'
 import styles from './page.module.css'
 import { useState, useEffect } from 'react'
-import { useParams, useSearchParams } from 'next/navigation'
+import { useParams, useSearchParams, useRouter } from 'next/navigation'
 
 export default function Oh1() {
+    const router = useRouter()
     const params = useParams()
     const [ darts, setDarts ] = useState([])
     const [ game, setGame ] = useState({
@@ -66,7 +67,7 @@ export default function Oh1() {
                     }
                 ]
             }));
-            return gameData; // Return the updated state
+            return gameData;
             
         });
     }
@@ -85,7 +86,7 @@ export default function Oh1() {
 
                     // Update the score only if it won't go below zero
                     let newInning = {
-                        score: newScore >= 0 ? newScore : player.innings[player.innings.length - 1].score,
+                        score: newScore >= 2 | newScore === 0 ? newScore : player.innings[player.innings.length - 1].score,
                         darts: darts
                     }
                     if (newInning.score === 0) { gameData.winner = player.username }
@@ -232,6 +233,7 @@ export default function Oh1() {
                 <div>
                     <img src="/dart.svg" alt="dart" />
                     <h2>Game Over</h2>
+                    <button onClick={() => { router.push('/')}}>Play Again</button>
                 </div>
             </div>)
             }
