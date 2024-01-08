@@ -9,6 +9,7 @@ export default async function Rankings() {
     .then(res => res.json())
     .then(data => {
        return data.players.map((player, index) => {
+            console.log(player.rank['301'])
             return (
                 <PlayerCard
                     key={index}
