@@ -5,7 +5,7 @@ import styles from './page.module.css';
 
 async function fetchRankings() {
     if (!process.env.NEXT_PUBLIC_BASE_API_URL) { return null }
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/users/ranking?t=301`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/users/ranking?t=301`, {cache: "no-store", next: { revalidate: 4,}});
     return res.json()
     }  
 
