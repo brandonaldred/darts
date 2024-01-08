@@ -24,7 +24,6 @@ export default function Home() {
     .then(data => data.json())
     var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-    
       var raw = JSON.stringify({
         gamePlayers
       });

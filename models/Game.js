@@ -6,10 +6,9 @@ const inningSchema = new Schema({
 });
 
 const playerSchema = new Schema({
-   // Define the properties for each player
    firstName: String,
    username: String,
-   // Add the innings property to store innings for each player
+   rank: {},
    innings: [inningSchema],
 });
 

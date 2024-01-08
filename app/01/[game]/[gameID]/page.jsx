@@ -104,6 +104,36 @@ export default function Oh1() {
             });
 
             if (gameData.winner) {
+                const playerOneActualScore = gameData.winner === game.players[0].username ? 1 : 0;
+                const rankings = calculateNewRating(game.players[0], game.players[1], playerOneActualScore);
+
+                gameData.players.forEach((player, index) => {
+                    player.rank[gameData.type] = rankings[index];
+
+                    var rankingHeaders = new Headers();
+                    rankingHeaders.append("Content-Type", "application/json");
+
+                    var rankingRaw = JSON.stringify(
+                        {
+                            "rank": {
+                                [gameData.type]: player.rank[gameData.type]
+                            }
+                        });
+                    console.log(rankingRaw);
+
+                    var requestOptions = {
+                    method: 'PATCH',
+                    headers: rankingHeaders,
+                    body: rankingRaw,
+                    redirect: 'follow'
+                    };
+
+                    fetch(`/api/users?id=${player._id}`, requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+                })
+
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
 
@@ -124,6 +154,7 @@ export default function Oh1() {
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
+                
             }
             // Update the turn and show properties with the next player's username
             gameData.turn = nextPlayerUsername;
@@ -149,6 +180,50 @@ export default function Oh1() {
             setDarts(prev => [...prev, n])
         }
     }
+
+    function calculateNewRating(playerOne, playerTwo, playerOneActualScore) {
+        const K = 32; // K-factor, determines the maximum rating change
+    
+        // Calculate the expected score (probability of winning) for player one
+        const playerOneExpectedScore = 1 / (1 + Math.pow(10, (playerTwo.rank[game.type] - playerOne.rank[game.type]) / 400));
+    
+        // Calculate the new rating for player one and round it
+        const playerOneNewRating = Math.round(playerOne.rank[game.type] + K * (playerOneActualScore - playerOneExpectedScore));
+    
+        // Now, for player two, we can use the same formula, but we know that if player one won (actual score = 1), then player two lost (actual score = 0), and vice versa.
+        const playerTwoExpectedScore = 1 - playerOneExpectedScore; // because the total probability is 1
+        const playerTwoActualScore = 1 - playerOneActualScore; // if one player wins, the other loses
+        const playerTwoNewRating = Math.round(playerTwo.rank[game.type] + K * (playerTwoActualScore - playerTwoExpectedScore));
+        
+        updateRatingDB(playerOne.username, game.type, playerOneNewRating)
+        updateRatingDB(playerTwo.username, game.type, playerTwoNewRating)
+
+        return [playerOneNewRating, playerTwoNewRating];
+    }
+
+    function updateRatingDB(username, type, rating) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+        "username": username,
+        "type": type,
+        "rank": rating
+        });
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+        fetch("/api/rank", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    }
+
      return(
         <>
             <GameHeader />
