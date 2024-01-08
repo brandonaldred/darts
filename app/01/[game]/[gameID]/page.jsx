@@ -8,7 +8,7 @@ import { useParams, useSearchParams } from 'next/navigation'
 
 export default function Oh1() {
     const params = useParams()
-    const [darts, setDarts] = useState([])
+    const [ darts, setDarts ] = useState([])
     const [ game, setGame ] = useState({
     _id: params.gameID,
     name: params.gameID,
@@ -27,7 +27,7 @@ export default function Oh1() {
                 gameData.turn = '',
                 gameData.show = ''
                 gameData.players.map(player => (
-                    player.innings = [
+                    player.innings = [ 
                         {
                             score: params.gameType,
                             darts: []
@@ -43,32 +43,91 @@ export default function Oh1() {
           fetchData();
       }, []);
 
-    function setShow(p) {}
-
-    function gamePlay(p) {
-        console.log(game.innings)
-        setGame(prev => ({
-            ...prev,
-            show: p,
-            innings: prev.innings + 1,
-            players: prev.players.map(player => ({
-              ...player,
-              innings: [
-                {
-                  score: params.gameType,
-                  darts: []
-                }
-              ]
-            }))
-          }))
-          console.log(game)
-        
+    function setShow(p) {
+        setGame(prev => {
+            const gameData = { ...prev };
+            gameData.show = p;
+            return gameData;
+        })
     }
 
-    function endTurn() {
+    function gamePlay(p) {
+        setGame(prev => {
+            const gameData = { ...prev };
+            gameData.innings = gameData.innings + 1;
+            gameData.turn = p;
+            gameData.show = p;
+            gameData.players = gameData.players.map(player => ({
+                ...player,
+                innings: [
+                    {
+                        score: gameData.type,
+                        darts: []
+                    }
+                ]
+            }));
+            return gameData; // Return the updated state
+            
+        });
+    }
+    function endTurn(p) {
         const turnTotal = darts.reduce((acc, cur) => { return acc + cur })
-        setScore( score - turnTotal >= 0 ? score - turnTotal : score )
-        setDarts([])
+        setGame(prev => {
+            const gameData = { ...prev };
+            let nextPlayerUsername = null;
+            let inningCount = gameData.innings
+
+            gameData.players.forEach((player, index) => {
+                gameData.innings = inningCount < player.innings.length ? player.innings.length : gameData.innings
+                if (player.username === gameData.turn) {
+                    // Calculate the new score
+                    const newScore = player.innings[player.innings.length - 1].score - turnTotal;
+
+                    // Update the score only if it won't go below zero
+                    player.innings[player.innings.length - 1].score = newScore >= 0 ? newScore : player.innings[player.innings.length - 1].score;
+                    if (player.innings[player.innings.length - 1].score === 0) { gameData.winner = player.username }
+                    player.innings[player.innings.length - 1].darts = darts;
+                    
+                    // Determine the next player's username
+                    if (index === gameData.players.length - 1) {
+                        // If this is the last player, the next turn goes to the first player
+                        nextPlayerUsername = gameData.players[0].username;
+                    } else {
+                        // Otherwise, the next turn goes to the next player in the array
+                        nextPlayerUsername = gameData.players[index + 1].username;
+                    }
+                }
+            });
+
+            if (gameData.winner) {
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                var raw = JSON.stringify({
+                "winner": gameData.winner,
+                "players": gameData.players,
+                "innings": gameData.innings
+                });
+
+                var requestOptions = {
+                method: 'PATCH',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+                };
+
+                fetch(`/games?n=${gameData.name}`, requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+            }
+            // Update the turn and show properties with the next player's username
+            gameData.turn = nextPlayerUsername;
+            gameData.show = nextPlayerUsername;
+
+            return gameData;
+            });
+        setDarts([]);
     }
 
     function undoDarts() {
@@ -90,16 +149,16 @@ export default function Oh1() {
      return(
         <>
             <GameHeader />
-            {/* score == 0 && 
+            { game.winner && 
             (<div className={styles['play-again']}>
                 <div>
                     <img src="/dart.svg" alt="dart" />
                     <h2>Game Over</h2>
                 </div>
-            </div>) */
+            </div>)
             }
             <div className={`content-container`}>
-                { game.innings === 0 && 
+                { game.innings == 0 && 
                 <>
                     <div className={styles.first}>Select who goes first</div> 
                     <div className={styles['player-select']}>
@@ -114,7 +173,15 @@ export default function Oh1() {
                     <div className={styles.sticky}>
                         <div className={styles['player-select']}>
                             { game.players.length > 0 && game.players.map((player, index) => {
-                                return <div key={index} className={styles.inactive} onClick={() => { setShow(player.username) }}>{player.firstName}</div>
+                                return (
+                                    <div
+                                        key={index}
+                                        className={`${game.show === player.username ? '' : styles.inactive} `}
+                                        onClick={() => { setShow(player.username) }}>
+                                        { game.turn === player.username ? <img className={styles.star} src="/star.svg" alt="Active Player"/> : '' }
+                                        {player.firstName}
+                                    </div>
+                                )
                             }) }
                         </div>
                             { 
@@ -122,9 +189,10 @@ export default function Oh1() {
                                     <PlayerScore
                                         key={i}
                                         show={p.username == game.show ? true : false}
+                                        turn={p.username == game.turn ? true : false}
                                         player={p.firstName}
                                         avatar={`/user-images/${p.username}.jpg`}
-                                        score={game.type}
+                                        score={p.innings[p.innings.length - 1].score}
                                     />)
                             }
                             <div className={styles['darts']}>
