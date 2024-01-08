@@ -84,9 +84,13 @@ export default function Oh1() {
                     const newScore = player.innings[player.innings.length - 1].score - turnTotal;
 
                     // Update the score only if it won't go below zero
-                    player.innings[player.innings.length - 1].score = newScore >= 0 ? newScore : player.innings[player.innings.length - 1].score;
-                    if (player.innings[player.innings.length - 1].score === 0) { gameData.winner = player.username }
-                    player.innings[player.innings.length - 1].darts = darts;
+                    let newInning = {
+                        score: newScore >= 0 ? newScore : player.innings[player.innings.length - 1].score,
+                        darts: darts
+                    }
+                    if (newInning.score === 0) { gameData.winner = player.username }
+                    player.innings.push(newInning);
+                    gameData.innings = gameData.innings + 1
                     
                     // Determine the next player's username
                     if (index === gameData.players.length - 1) {
@@ -116,7 +120,7 @@ export default function Oh1() {
                 redirect: 'follow'
                 };
 
-                fetch(`/games?n=${gameData.name}`, requestOptions)
+                fetch(`/api/games?n=${gameData.name}`, requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -145,7 +149,6 @@ export default function Oh1() {
             setDarts(prev => [...prev, n])
         }
     }
-
      return(
         <>
             <GameHeader />

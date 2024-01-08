@@ -35,9 +35,11 @@ export async function POST(req) {
 export async function PATCH(req) {
     const gameName = req.nextUrl.searchParams.get('n');
     const gameData = await req.json();
+    console.log(gameName)
     await connectMongoDB();
     
     const game = await Game.findOne({name: gameName});
+    console.log(game)
     if (!game){ return NextResponse.json({ message: 'Game not found' }, { status: 404 }); }
 
     if (gameData.name) { game.name = gameData.name; }
