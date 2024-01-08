@@ -1,0 +1,11 @@
+.content-wrapper {
+    background: var(--black);
+}
+
+.content-wrapper h1 {
+    color: var(--white);
+    padding: 35px;
+    margin: 0 auto;
+    text-align: center;
+    text-decoration: underline;
+}

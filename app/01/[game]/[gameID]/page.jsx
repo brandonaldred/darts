@@ -24,6 +24,7 @@ export default function Oh1() {
         async function fetchData() {
             try {
                 const gameData = await fetch(`/api/games?id=${params.gameID}`).then(res => res.json()).then(data => data.game);
+                //need to add a conditional here
                 gameData.innings = 0,
                 gameData.turn = '',
                 gameData.show = ''
@@ -86,11 +87,11 @@ export default function Oh1() {
 
                     // Update the score only if it won't go below zero
                     let newInning = {
-                        score: newScore >= 2 | newScore === 0 ? newScore : player.innings[player.innings.length - 1].score,
+                        score: newScore >= 2 || newScore === 0 ? newScore : player.innings[player.innings.length - 1].score,
                         darts: darts
                     }
-                    if (newInning.score === 0) { gameData.winner = player.username }
                     player.innings.push(newInning);
+                    if (newInning.score === 0) { gameData.winner = player.username }
                     gameData.innings = gameData.innings + 1
                     
                     // Determine the next player's username

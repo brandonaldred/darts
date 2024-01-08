@@ -1,0 +1,24 @@
+.player-card {
+    max-width: 400px;
+    padding: 10px;
+    margin: 35px auto;
+    border: 1px solid var(--red);
+    background-color: var(--black);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+}
+
+.player-card img {
+    margin-right: 35px;
+    border-bottom-left-radius: var(--sm-radius);
+    border-top-left-radius: var(--sm-radius);
+}
+
+.player-content h3 {
+    font-size: 2em;
+}
+
+.user-name {
+    filter: opacity(0.5);
+}
