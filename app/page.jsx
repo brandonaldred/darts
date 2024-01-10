@@ -91,6 +91,7 @@ export default function Home() {
                   Play Game
                 </div> }
           </div>
+          <button onClick={() => {router.push("/rankings")}}>View Rankings</button>
         </div>
       </main>
     )

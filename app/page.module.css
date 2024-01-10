@@ -2,10 +2,10 @@
     background: var(--black);
     color: var(--white);
     width: 100svw;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
   }
   
   .home-container {
@@ -42,7 +42,7 @@
     
   .player-select-container {
     max-width: 375px;
-    margin-bottom: 1500px;
+    margin-bottom: 45px;
     width: 100%;
     border: 1px solid var(--red);
     text-align: center;
@@ -103,4 +103,16 @@
   .game-type:hover, .game-type-selected {
     background: var(--white);
     color: var(--black);
+  }
+
+  .main-content button {
+    background-color: var(--black);
+    border: 1px solid var(--red);
+    color: var(--white);
+    padding: 15px 65px;
+  }
+
+  .main-content button:hover {
+    background-color: var(--red-hover);
+    cursor: pointer;
   }
