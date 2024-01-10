@@ -1,5 +1,6 @@
 .content-wrapper {
     background: var(--black);
+    padding-bottom: 45px;
 }
 
 .content-wrapper h1 {
