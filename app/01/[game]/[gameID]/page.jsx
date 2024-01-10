@@ -190,12 +190,12 @@ export default function Oh1() {
         const playerOneExpectedScore = 1 / (1 + Math.pow(10, (playerTwo.rank[game.type] - playerOne.rank[game.type]) / 400));
     
         // Calculate the new rating for player one and round it
-        const playerOneNewRating = Math.round(playerOne.rank[game.type] + K * (playerOneActualScore - playerOneExpectedScore));
+        const playerOneNewRating = playerOne.rank[game.type] + K * (playerOneActualScore - playerOneExpectedScore);
     
         // Now, for player two, we can use the same formula, but we know that if player one won (actual score = 1), then player two lost (actual score = 0), and vice versa.
         const playerTwoExpectedScore = 1 - playerOneExpectedScore; // because the total probability is 1
         const playerTwoActualScore = 1 - playerOneActualScore; // if one player wins, the other loses
-        const playerTwoNewRating = Math.round(playerTwo.rank[game.type] + K * (playerTwoActualScore - playerTwoExpectedScore));
+        const playerTwoNewRating = playerTwo.rank[game.type] + K * (playerTwoActualScore - playerTwoExpectedScore);
         
         updateRatingDB(playerOne.username, game.type, playerOneNewRating)
         updateRatingDB(playerTwo.username, game.type, playerTwoNewRating)
