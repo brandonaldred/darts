@@ -185,23 +185,26 @@ export default function Oh1() {
 
     function calculateNewRating(playerOne, playerTwo, playerOneActualScore) {
         const K = 32; // K-factor, determines the maximum rating change
+        const ratingFloor = 800; // Minimum possible rating
     
         // Calculate the expected score (probability of winning) for player one
         const playerOneExpectedScore = 1 / (1 + Math.pow(10, (playerTwo.rank[game.type] - playerOne.rank[game.type]) / 400));
     
-        // Calculate the new rating for player one and round it
-        const playerOneNewRating = playerOne.rank[game.type] + K * (playerOneActualScore - playerOneExpectedScore);
+        let playerOneNewRating = playerOne.rank[game.type] + K * (playerOneActualScore - playerOneExpectedScore);
+        playerOneNewRating = Math.max(playerOneNewRating, ratingFloor); // Ensure rating does not drop below the floor
     
         // Now, for player two, we can use the same formula, but we know that if player one won (actual score = 1), then player two lost (actual score = 0), and vice versa.
         const playerTwoExpectedScore = 1 - playerOneExpectedScore; // because the total probability is 1
         const playerTwoActualScore = 1 - playerOneActualScore; // if one player wins, the other loses
-        const playerTwoNewRating = playerTwo.rank[game.type] + K * (playerTwoActualScore - playerTwoExpectedScore);
-        
-        updateRatingDB(playerOne.username, game.type, playerOneNewRating)
-        updateRatingDB(playerTwo.username, game.type, playerTwoNewRating)
-
+        let playerTwoNewRating = playerTwo.rank[game.type] + K * (playerTwoActualScore - playerTwoExpectedScore);
+        playerTwoNewRating = Math.max(playerTwoNewRating, ratingFloor); // Ensure rating does not drop below the floor
+    
+        updateRatingDB(playerOne.username, game.type, playerOneNewRating);
+        updateRatingDB(playerTwo.username, game.type, playerTwoNewRating);
+    
         return [playerOneNewRating, playerTwoNewRating];
     }
+    
 
     function updateRatingDB(username, type, rating) {
         var myHeaders = new Headers();
