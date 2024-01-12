@@ -18,7 +18,7 @@ export default async function Rankings() {
                 position={index}
                 firstName={player.firstName}
                 username={player.username}
-                rank={player.rank['301']}
+                rank={player.rank['301'].toFixed(2)}
             />
             )
     })
