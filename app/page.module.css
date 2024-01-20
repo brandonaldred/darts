@@ -116,3 +116,15 @@
     background-color: var(--red-hover);
     cursor: pointer;
   }
+
+  .sub-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .sub-buttons button:first-child {
+    width: 30%;
+    text-align: center;
+    padding: 5px 10px !important;
+  }

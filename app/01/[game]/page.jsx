@@ -57,10 +57,9 @@ export default function Oh1() {
             </div>)
             }
             <div className={`content-container`}>
-                <div className={styles['player-select']}>
-                    <div>Player 1</div>
-                    <div className={styles.inactive}>Player 2</div>
-                </div>
+            <div className={styles['player-score']}>
+            <h3>{score}</h3>
+        </div> 
                 <div className={styles.sticky}>
                     <PlayerScore turn={true} player="Player Name" score={score} darts={darts} leg={leg} />
                     <div className={styles['darts']}>

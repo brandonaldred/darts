@@ -176,3 +176,52 @@
 .selected {
     display: none;
 }
+
+.player-score {
+    padding: 25px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    background-color: var(--white);
+    z-index: 99;
+    border-bottom: 1px solid var(--black);
+    margin-bottom: 15px;
+}
+
+.player-score h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.player-score h3 {
+    font-size: 6rem;
+    font-weight: 900;
+    margin: 0;
+    line-height: 6rem;
+}
+
+.darts {
+    display: flex;
+    justify-content: space-between;
+    margin: 32px auto 20px;
+    width: 100%;
+}
+
+.darts p {
+    width: 33%;
+    margin: auto;
+    text-align: center;
+}
+
+.darts p:before {
+    content: '';
+    width: 25px;
+    height: 25px;
+    background-image: url('/dart.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-right: 15px;
+}
