@@ -320,8 +320,216 @@ const threeOuts = {
     "third": "Bull"
   },
   "59": {
-    "first": 19,
+    "first": "19",
     "second": "D20"
+  },
+  "58": {
+    "first": "18",
+    "second": "D20"
+  },
+  "57": {
+    "first": "17",
+    "second": "D20"
+  },
+  "56": {
+    "first": "16",
+    "second": "D20"
+  },
+  "55": {
+    "first": "15",
+    "second": "D20"
+  },
+  "54": {
+    "first": "14",
+    "second": "D20"
+  },
+  "53": {
+    "first": "13",
+    "second": "D20"
+  },
+  "52": {
+    "first": "12",
+    "second": "D20"
+  },
+  "51": {
+    "first": "11",
+    "second": "D20"
+  },
+  "50": {
+    "first": "10",
+    "second": "D20"
+  },
+  "49": {
+    "first": "9",
+    "second": "D20"
+  },
+  "48": {
+    "first": "8",
+    "second": "D20"
+  },
+  "47": {
+    "first": "7",
+    "second": "D20"
+  },
+  "46": {
+    "first": "6",
+    "second": "D20"
+  },
+  "45": {
+    "first": "13",
+    "second": "D16"
+  },
+  "44": {
+    "first": "12",
+    "second": "D16"
+  },
+  "43": {
+    "first": "3",
+    "second": "D20"
+  },
+  "42": {
+    "first": "10",
+    "second": "D16"
+  },
+  "41": {
+    "first": "9",
+    "second": "D16"
+  },
+  "40": {
+    "first": "D20"
+  },
+  "39": {
+    "first": "7",
+    "second": "D16"
+  },
+  "38": {
+    "first": "D19"
+  },
+  "37": {
+    "first": "5",
+    "second": "D16"
+  },
+  "36": {
+    "first": "D18"
+  },
+  "35": {
+    "first": "3",
+    "second": "D16"
+  },
+  "34": {
+    "first": "D17"
+  },
+  "33": {
+    "first": "1",
+    "second": "D16"
+  },
+  "32": {
+    "first": "D16"
+  },
+  "31": {
+    "first": "7",
+    "second": "D12"
+  },
+  "30": {
+    "first": "D15"
+  },
+  "29": {
+    "first": "13",
+    "second": "D8"
+  },
+  "28": {
+    "first": "D14"
+  },
+  "27": {
+    "first": "11",
+    "second": "D8"
+  },
+  "26": {
+    "first": "D13"
+  },
+  "25": {
+    "first": "9",
+    "second": "D8"
+  },
+  "24": {
+    "first": "D12"
+  },
+  "23": {
+    "first": "7",
+    "second": "D8"
+  },
+  "22": {
+    "first": "D11"
+  },
+  "21": {
+    "first": "5",
+    "second": "D8"
+  },
+  "20": {
+    "first": "D10"
+  },
+  "19": {
+    "first": "3",
+    "second": "D8"
+  },
+  "18": {
+    "first": "D9"
+  },
+  "17": {
+    "first": "1",
+    "second": "D8"
+  },
+  "16": {
+    "first": "D8"
+  },
+  "15": {
+    "first": "7",
+    "second": "D4"
+  },
+  "14": {
+    "first": "D7"
+  },
+  "13": {
+    "first": "5",
+    "second": "D4"
+  },
+  "12": {
+    "first": "D6"
+  },
+  "11": {
+    "first": "3",
+    "second": "D4"
+  },
+  "10": {
+    "first": "D5"
+  },
+  "9": {
+    "first": "1",
+    "second": "D4"
+  },
+  "8": {
+    "first": "D4"
+  },
+  "7": {
+    "first": "3",
+    "second": "D2"
+  },
+  "6": {
+    "first": "D3"
+  },
+  "5": {
+    "first": "1",
+    "second": "D2"
+  },
+  "4": {
+    "first": "D2"
+  },
+  "3": {
+    "first": "1",
+    "second": "D1"
+  },
+  "2": {
+    "first": "D1"
   },
   "60": {
     "first": 20,
