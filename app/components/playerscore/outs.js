@@ -320,160 +320,160 @@ const threeOuts = {
     "third": "Bull"
   },
   "60": {
-    "1st Dart": 20,
-    "2nd Dart": "D20"
+    "first": 20,
+    "second": "D20"
   },
   "61": {
-    "1st Dart": "T15",
-    "2nd Dart": "D8"
+    "first": "T15",
+    "second": "D8"
   },
   "62": {
-    "1st Dart": "T10",
-    "2nd Dart": "D16"
+    "first": "T10",
+    "second": "D16"
   },
   "63": {
-    "1st Dart": "T13",
-    "2nd Dart": "D12"
+    "first": "T13",
+    "second": "D12"
   },
   "64": {
-    "1st Dart": "T16",
-    "2nd Dart": "D8"
+    "first": "T16",
+    "second": "D8"
   },
   "65": {
-    "1st Dart": "T19",
-    "2nd Dart": "D4"
+    "first": "T19",
+    "second": "D4"
   },
   "66": {
-    "1st Dart": "T10",
-    "2nd Dart": "D18"
+    "first": "T10",
+    "second": "D18"
   },
   "67": {
-    "1st Dart": "T17",
-    "2nd Dart": "D8"
+    "first": "T17",
+    "second": "D8"
   },
   "69": {
-    "1st Dart": "T15",
-    "2nd Dart": "D12"
+    "first": "T15",
+    "second": "D12"
   },
   "70": {
-    "1st Dart": "T10",
-    "2nd Dart": "D20"
+    "first": "T10",
+    "second": "D20"
   },
   "71": {
-    "1st Dart": "T13",
-    "2nd Dart": "D16"
+    "first": "T13",
+    "second": "D16"
   },
   "72": {
-    "1st Dart": "T16",
-    "2nd Dart": "D12"
+    "first": "T16",
+    "second": "D12"
   },
   "73": {
-    "1st Dart": "T19",
-    "2nd Dart": "D8"
+    "first": "T19",
+    "second": "D8"
   },
   "74": {
-    "1st Dart": "T14",
-    "2nd Dart": "D16"
+    "first": "T14",
+    "second": "D16"
   },
   "75": {
-    "1st Dart": "T17",
-    "2nd Dart": "D12"
+    "first": "T17",
+    "second": "D12"
   },
   "76": {
-    "1st Dart": "T20",
-    "2nd Dart": "D8"
+    "first": "T20",
+    "second": "D8"
   },
   "77": {
-    "1st Dart": "T19",
-    "2nd Dart": "D10"
+    "first": "T19",
+    "second": "D10"
   },
   "78": {
-    "1st Dart": "T18",
-    "2nd Dart": "D12"
+    "first": "T18",
+    "second": "D12"
   },
   "79": {
-    "1st Dart": "T19",
-    "2nd Dart": "D11"
+    "first": "T19",
+    "second": "D11"
   },
   "80": {
-    "1st Dart": "T20",
-    "2nd Dart": "D10"
+    "first": "T20",
+    "second": "D10"
   },
   "81": {
-    "1st Dart": "T19",
-    "2nd Dart": "D12"
+    "first": "T19",
+    "second": "D12"
   },
   "82": {
-    "1st Dart": "T14",
-    "2nd Dart": "D20"
+    "first": "T14",
+    "second": "D20"
   },
   "83": {
-    "1st Dart": "T17",
-    "2nd Dart": "D16"
+    "first": "T17",
+    "second": "D16"
   },
   "84": {
-    "1st Dart": "T20",
-    "2nd Dart": "D12"
+    "first": "T20",
+    "second": "D12"
   },
   "85": {
-    "1st Dart": "T15",
-    "2nd Dart": "D20"
+    "first": "T15",
+    "second": "D20"
   },
   "86": {
-    "1st Dart": "T18",
-    "2nd Dart": "D16"
+    "first": "T18",
+    "second": "D16"
   },
   "87": {
-    "1st Dart": "T17",
-    "2nd Dart": "D18"
+    "first": "T17",
+    "second": "D18"
   },
   "88": {
-    "1st Dart": "T16",
-    "2nd Dart": "D20"
+    "first": "T16",
+    "second": "D20"
   },
   "89": {
-    "1st Dart": "T19",
-    "2nd Dart": "D16"
+    "first": "T19",
+    "second": "D16"
   },
   "90": {
-    "1st Dart": "T20",
-    "2nd Dart": "D15"
+    "first": "T20",
+    "second": "D15"
   },
   "91": {
-    "1st Dart": "T17",
-    "2nd Dart": "D20"
+    "first": "T17",
+    "second": "D20"
   },
   "92": {
-    "1st Dart": "T20",
-    "2nd Dart": "D16"
+    "first": "T20",
+    "second": "D16"
   },
   "93": {
-    "1st Dart": "T19",
-    "2nd Dart": "D18"
+    "first": "T19",
+    "second": "D18"
   },
   "94": {
-    "1st Dart": "T18",
-    "2nd Dart": "D20"
+    "first": "T18",
+    "second": "D20"
   },
   "95": {
-    "1st Dart": "T19",
-    "2nd Dart": "D19"
+    "first": "T19",
+    "second": "D19"
   },
   "96": {
-    "1st Dart": "T20",
-    "2nd Dart": "D18"
+    "first": "T20",
+    "second": "D18"
   },
   "97": {
-    "1st Dart": "T19",
-    "2nd Dart": "D20"
+    "first": "T19",
+    "second": "D20"
   },
   "98": {
-    "1st Dart": "T20",
-    "2nd Dart": "D19"
+    "first": "T20",
+    "second": "D19"
   },
   "100": {
-    "1st Dart": "T20",
-    "2nd Dart": "D20"
+    "first": "T20",
+    "second": "D20"
   }
 }
 
