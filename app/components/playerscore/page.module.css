@@ -22,3 +22,9 @@
     line-height: 6rem;
 }
 
+.updated-score {
+    display: flex;
+    justify-content: space-between;
+    height: 15px;
+}
+

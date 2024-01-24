@@ -277,6 +277,7 @@ export default function Oh1() {
                                         player={p.firstName}
                                         avatar={`/user-images/${p.username}.jpg`}
                                         score={p.innings[p.innings.length - 1].score}
+                                        darts = { darts }
                                     />)
                             }
                             <div className={styles['darts']}>
