@@ -11,7 +11,7 @@ export default function PlayerScore(props) {
             <h2>{props.player}</h2>
             <h3>{props.score}</h3>
                 <div className={ styles['updated-score']}>
-                    <p>Score: 
+                    <p>Current: 
                     { props.darts.length > 0 && props.score - props.darts.reduce((acc, cur) => { return acc + cur }) }
                     </p>
                     { threeOut[props.score] !== undefined && <p>Out:
