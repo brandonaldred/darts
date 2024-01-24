@@ -319,6 +319,10 @@ const threeOuts = {
     "second": "T20",
     "third": "Bull"
   },
+  "59": {
+    "first": 19,
+    "second": "D20"
+  },
   "60": {
     "first": 20,
     "second": "D20"
