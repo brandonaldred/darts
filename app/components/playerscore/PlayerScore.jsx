@@ -11,14 +11,12 @@ export default function PlayerScore(props) {
             <h2>{props.player}</h2>
             <h3>{props.score}</h3>
                 <div className={ styles['updated-score']}>
-                    <p>Current: 
-                    { props.darts.length > 0 && props.score - props.darts.reduce((acc, cur) => { return acc + cur }) }
-                    </p>
-                    { threeOut[props.score] !== undefined && <p>Out:
-                        { threeOut[props.score] && threeOut[props.score].first}, 
-                        { threeOut[props.score] && threeOut[props.score].second}, 
-                        { threeOut[props.score] && threeOut[props.score].third}
-                    </p> }
+                    { threeOut[props.score] !== undefined && 
+                    <p>Out: {Object.values(threeOut[props.score]).map((value, index) => (
+                        <span key={index}>{value}{index < Object.values(threeOut[props.score]).length - 1 ? ', ' : ''}</span>
+                    ))}</p>
+}
+
                 </div>
         </div>
     )

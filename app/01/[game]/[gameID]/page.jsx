@@ -276,7 +276,7 @@ export default function Oh1() {
                                         turn={p.username == game.turn ? true : false}
                                         player={p.firstName}
                                         avatar={`/user-images/${p.username}.jpg`}
-                                        score={p.innings[p.innings.length - 1].score}
+                                        score={darts.length < 1 ? p.innings[p.innings.length - 1].score : p.innings[p.innings.length-1].score - darts.reduce((acc, cur) => { return acc + cur })}
                                         darts = { darts }
                                     />)
                             }
