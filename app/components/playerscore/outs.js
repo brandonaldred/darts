@@ -563,6 +563,10 @@ const threeOuts = {
     "first": "T17",
     "second": "D8"
   },
+  "68": {
+    "first": "T12",
+    "second": "D16"
+  },
   "69": {
     "first": "T15",
     "second": "D12"
