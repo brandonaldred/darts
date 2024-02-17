@@ -300,6 +300,11 @@ export default function Oh1() {
                             return (<DartBoard addDart={addDart} key={n} content={n} class={n % 2 ? 'odd' : 'even'} />)
                         })
                     }
+                    <p className={`${styles.odd} ${styles.bagadix}`} onClick={() => {
+                        addDart(20)
+                        addDart(1)
+                        addDart(5)
+                    }}>Bagadix</p>
                 </div>}
             </div>
         </>

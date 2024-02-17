@@ -213,3 +213,8 @@
 .star {
     margin-right: 10px;
 }
+
+.bagadix {
+    grid-column-start: 1;
+    grid-column-end: -1;
+}
