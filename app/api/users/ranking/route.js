@@ -39,15 +39,6 @@ export async function GET(req) {
                 cond: { $eq: ["$$game.winner", "$username"] } // Count wins
               }
             }
-          },
-          avgScorePerInning: {
-            $avg: {
-              $map: {
-                input: "$games",
-                as: "game",
-                in: { $avg: "$$game.players.innings.darts" } // Calculate average score per inning
-              }
-            }
           }
         }
       },

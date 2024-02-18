@@ -12,7 +12,6 @@ async function fetchRankings() {
 export default async function Rankings() {
     const res = await fetchRankings()
     const rankRatings = res.players.map((player, index) => {
-        console.log(player)
         return (
             <PlayerCard
                 key={index}
