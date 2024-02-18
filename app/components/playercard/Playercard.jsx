@@ -9,6 +9,11 @@ export default function PlayerCard(props) {
                 
                 <h3>{`# ${props.position + 1} ${props.firstName}`}</h3>
                 <p>Rank: {props.rank}</p>
+                <div className={styles['card-stats']}>
+                    <p>G: {props.totalGames}</p>
+                    <p>W: {props.winCount}</p>
+                    <p>Win %: {(1 * (props.winCount / props.totalGames)).toFixed(2)}</p>
+                </div>
             </div>
         </div>
     )

@@ -14,11 +14,22 @@
     border-bottom-left-radius: var(--sm-radius);
     border-top-left-radius: var(--sm-radius);
 }
-
+.player-content {
+    width: 100%;
+}
 .player-content h3 {
     font-size: 2em;
 }
 
 .user-name {
     filter: opacity(0.5);
+}
+
+.card-stats {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    font-size: 0.75rem;
+    justify-content: space-between;
+    color: var(--red);
 }

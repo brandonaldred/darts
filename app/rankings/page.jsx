@@ -12,6 +12,7 @@ async function fetchRankings() {
 export default async function Rankings() {
     const res = await fetchRankings()
     const rankRatings = res.players.map((player, index) => {
+        console.log(player)
         return (
             <PlayerCard
                 key={index}
@@ -19,6 +20,8 @@ export default async function Rankings() {
                 firstName={player.firstName}
                 username={player.username}
                 rank={player.rank['301'].toFixed(2)}
+                totalGames={player.totalGames}
+                winCount={player.winCount}
             />
             )
     })
@@ -26,7 +29,7 @@ export default async function Rankings() {
         <>
             <GameHeader />
             <div className={styles['content-wrapper']}>
-            <h1>Player Rankings</h1>
+            <h1>'01 Player Rankings</h1>
                 {rankRatings}
             </div>
         </>
