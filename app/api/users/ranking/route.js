@@ -53,6 +53,9 @@ export async function GET(req) {
       },
       {
         $sort: { winCount: -1 } // Sort players by win count
+      },
+      {
+        $sort: { [`rank.${t}`]: -1 } // Sort players by rank['301'] from highest to lowest
       }
     ];
 
