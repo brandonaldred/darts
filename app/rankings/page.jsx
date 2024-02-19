@@ -22,7 +22,7 @@ export default async function Rankings() {
                 rank={player.rank}
                 totalGames={player.totalGames}
                 winCount={player.wins}
-                inningAvg={player.avgScorePerInning.toFixed(0)}
+                inningAvg={player.avgScorePerInning}
             />
             )
     })

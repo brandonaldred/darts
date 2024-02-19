@@ -12,7 +12,7 @@ export default function PlayerCard(props) {
                 <div className={styles['card-stats']}>
                     <p>G: {props.totalGames}</p>
                     <p>W: {props.winCount}</p>
-                    <p>Win %: {(100 * (props.winCount / props.totalGames)).toFixed(2)}</p>
+                    <p>Win %: {(100 * (props.winCount / props.totalGames))}</p>
                     <p>I: {props.inningAvg}</p>
                 </div>
             </div>
