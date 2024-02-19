@@ -8,7 +8,7 @@ export default function PlayerCard(props) {
             <div className={styles['player-content']}>
                 
                 <h3>{`# ${props.position + 1} ${props.firstName}`}</h3>
-                <p>Rank: {props.rank}</p>
+                <p>Rank: {props.rank.toFixed(2)}</p>
                 <div className={styles['card-stats']}>
                     <p>G: {props.totalGames}</p>
                     <p>W: {props.winCount}</p>
