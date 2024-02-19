@@ -19,7 +19,7 @@ export default async function Rankings() {
                 position={index}
                 firstName={player.firstName}
                 username={player._id}
-                rank={player.rank.toFixed(2)}
+                rank={player.rank}
                 totalGames={player.totalGames}
                 winCount={player.wins}
                 inningAvg={player.avgScorePerInning.toFixed(0)}
