@@ -5,11 +5,12 @@ import styles from './page.module.css';
 
 async function fetchRankings() {
     if (!process.env.NEXT_PUBLIC_BASE_API_URL) { return null }
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/users/ranking?t=301`, {cache: "no-store", next: { revalidate: 4,}});
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/users/ranking?t=301`, {cache: "no-store"});
     return res.json()
     }  
 
 export default async function Rankings() {
+    
     const res = await fetchRankings()
     const rankRatings = res.players.map((player, index) => {
         return (
@@ -17,10 +18,11 @@ export default async function Rankings() {
                 key={index}
                 position={index}
                 firstName={player.firstName}
-                username={player.username}
-                rank={player.rank['301'].toFixed(2)}
+                username={player._id}
+                rank={player.rank.toFixed(2)}
                 totalGames={player.totalGames}
-                winCount={player.winCount}
+                winCount={player.wins}
+                inningAvg={player.avgScorePerInning.toFixed(0)}
             />
             )
     })

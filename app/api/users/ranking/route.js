@@ -1,6 +1,6 @@
 import connectMongoDB from "@/libs/mongodb";
 import User from "../../../../models/User";
-import Game from "../../../../models/Game"; // Import the Game model
+import Game from "../../../../models/Game"; // Update model name to Game
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
@@ -9,16 +9,15 @@ export async function GET(req) {
   try {
     await connectMongoDB();
 
-    const pipeline = [
+    // Pipeline to calculate total games and wins
+    const totalGamesPipeline = [
       {
         $match: {
-          // Filter players who have a rank for game type 't'
           [`rank.${t}`]: { $exists: true }
         }
       },
       {
         $lookup: {
-          // Join with the 'games' collection to get player's game data
           from: 'games',
           localField: 'username',
           foreignField: 'players.username',
@@ -26,28 +25,59 @@ export async function GET(req) {
         }
       },
       {
-        $project: {
-          firstName: 1,
-          username: 1,
-          rank: 1,
-          totalGames: { $size: "$games" }, // Count total games played
-          winCount: {
-            $size: {
-              $filter: {
-                input: "$games",
-                as: "game",
-                cond: { $eq: ["$$game.winner", "$username"] } // Count wins
-              }
-            }
-          }
-        }
+        $unwind: "$games"
       },
       {
-        $sort: { [`rank.${t}`]: -1 } // Sort players by rank['301'] from highest to lowest
+        $group: {
+          _id: "$username",
+          totalGames: { $sum: 1 },
+          wins: {
+            $sum: { $cond: [{ $eq: ["$games.winner", "$username"] }, 1, 0] }
+          }
+        }
       }
     ];
 
-    const players = await User.aggregate(pipeline);
+    // Execute the pipeline to calculate total games and wins
+    const totalGamesResult = await User.aggregate(totalGamesPipeline);
+
+    // Pipeline to calculate average total darts per player
+    const avgTotalDartsPipeline = [
+      { $unwind: "$players" },
+      { $unwind: "$players.innings" },
+      {
+        $group: {
+          _id: "$players.username",
+          avgTotalDarts: { $avg: { $sum: "$players.innings.darts" } }
+        }
+      }
+    ];
+
+    // Execute the pipeline to calculate average total darts per player
+    const avgTotalDartsResult = await Game.aggregate(avgTotalDartsPipeline); // Use Game model
+
+    // Construct the final result by combining the results, including the rank, and sorting by rank
+    const players = totalGamesResult.map(({ _id, totalGames, wins }) => {
+      const avgScorePerInningEntry = avgTotalDartsResult.find(entry => entry._id === _id);
+      return {
+        _id,
+        totalGames,
+        wins,
+        avgScorePerInning: avgScorePerInningEntry ? avgScorePerInningEntry.avgTotalDarts : null
+      };
+    });
+
+    // Fetch user details for each player
+    for (const player of players) {
+      const user = await User.findOne({ username: player._id });
+      if (user) {
+        player.firstName = user.firstName;
+        player.rank = user.rank[t];
+      }
+    }
+
+    // Sort players by rank
+    players.sort((a, b) => b.rank - a.rank);
 
     return NextResponse.json({ players }, { status: 201 });
   } catch (error) {
