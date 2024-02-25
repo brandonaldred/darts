@@ -42,16 +42,22 @@ export async function GET(req) {
     const totalGamesResult = await User.aggregate(totalGamesPipeline);
 
     // Pipeline to calculate average total darts per player
-    const avgTotalDartsPipeline = [
-      { $unwind: "$players" },
-      { $unwind: "$players.innings" },
-      {
-        $group: {
-          _id: "$players.username",
-          avgTotalDarts: { $avg: { $sum: "$players.innings.darts" } }
-        }
-      }
-    ];
+const avgTotalDartsPipeline = [
+  { $unwind: "$players" },
+  { $unwind: "$players.innings" },
+  {
+    $match: {
+      "players.innings.darts": { $gt: 0, $exists: true }
+    }
+  },
+  {
+    $group: {
+      _id: "$players.username",
+      avgTotalDarts: { $avg: { $sum: "$players.innings.darts" } }
+    }
+  }
+];
+
 
     // Execute the pipeline to calculate average total darts per player
     const avgTotalDartsResult = await Game.aggregate(avgTotalDartsPipeline); // Use Game model
